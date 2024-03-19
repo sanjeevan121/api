@@ -21,7 +21,9 @@ jobs:
         go-version: '1.21.2' # Update to the desired Go version compatible with Windows
 
     - name: Build
-      run: go build .
+      run: |
+        cd cmd
+        go build .
 
     - name: Test
       run: go test .
