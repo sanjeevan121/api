@@ -32,7 +32,7 @@ func CreateAlbum(c *gin.Context) {
 		Album:   newAlbum,
 	}
 
-	c.IndentedJSON(http.StatusCreated, response.Message)
+	c.IndentedJSON(http.StatusCreated, response.Album)
 }
 
 func UpdateAlbum(c *gin.Context) {

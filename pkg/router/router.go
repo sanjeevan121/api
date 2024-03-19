@@ -8,14 +8,25 @@ import (
 
 func Route() {
 	router := gin.Default()
-	router.GET("/getAlbums", handlers.GetAlbums)
-	router.POST("/createAlbum", handlers.CreateAlbum)
-	router.PUT("/updateAlbum/:albumName", handlers.UpdateAlbum)
-	router.GET("/getAlbumsSortedByDate", handlers.GetAlbumsSortedByDate)
-	router.GET("/getMusicians", handlers.GetMusicians)
-	router.POST("/createMusician", handlers.CreateMusician)
-	router.PUT("/updateMusician/:musicianName", handlers.UpdateMusician)
-	router.GET("/getAlbumsForMusicianSortedByPrice/:musicianName", handlers.GetAlbumsForMusicianSortedByPrice)
-	router.GET("/getMusiciansForAlbumSortedByName/:albumName", handlers.GetMusiciansForAlbumSortedByName)
-	router.Run("localhost:8080")
+
+	// Musicians Endpoints
+	musiciansGroup := router.Group("/musicians")
+	{
+		musiciansGroup.GET("", handlers.GetMusicians)
+		musiciansGroup.POST("", handlers.CreateMusician)
+		musiciansGroup.PUT("/:musicianName", handlers.UpdateMusician)
+	}
+
+	// Albums Endpoints
+	albumsGroup := router.Group("/albums")
+	{
+		albumsGroup.GET("", handlers.GetAlbums)
+		albumsGroup.POST("", handlers.CreateAlbum)
+		albumsGroup.PUT("/:albumName", handlers.UpdateAlbum)
+		albumsGroup.GET("/sortedByDate", handlers.GetAlbumsSortedByDate)
+		albumsGroup.GET("/forMusicianSortedByPrice/:musicianName", handlers.GetAlbumsForMusicianSortedByPrice)
+		albumsGroup.GET("/musicians/:albumName", handlers.GetMusiciansForAlbumSortedByName)
+	}
+
+	router.Run(":8080")
 }
