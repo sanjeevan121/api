@@ -14,7 +14,7 @@ func Route() {
 	{
 		musiciansGroup.GET("", handlers.GetMusicians)
 		musiciansGroup.POST("", handlers.CreateMusician)
-		musiciansGroup.PUT("/:musicianName", handlers.UpdateMusician)
+		musiciansGroup.PATCH("/:musicianName", handlers.UpdateMusician)
 	}
 
 	// Albums Endpoints
@@ -22,9 +22,9 @@ func Route() {
 	{
 		albumsGroup.GET("", handlers.GetAlbums)
 		albumsGroup.POST("", handlers.CreateAlbum)
-		albumsGroup.PUT("/:albumName", handlers.UpdateAlbum)
+		albumsGroup.PATCH("/:albumName", handlers.UpdateAlbum)
 		albumsGroup.GET("/sortedByDate", handlers.GetAlbumsSortedByDate)
-		albumsGroup.GET("/forMusicianSortedByPrice/:musicianName", handlers.GetAlbumsForMusicianSortedByPrice)
+		albumsGroup.GET("/albumsForMusicianSortedByPrice/:musicianName", handlers.GetAlbumsForMusicianSortedByPrice)
 		albumsGroup.GET("/musicians/:albumName", handlers.GetMusiciansForAlbumSortedByName)
 	}
 

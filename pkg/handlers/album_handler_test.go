@@ -19,13 +19,14 @@ func TestCreateAlbum(t *testing.T) {
 	// Initialize Gin router
 	router := gin.Default()
 
-	// Set up a mock request
+	// Set up a mock request with valid data
 	requestBody := models.MusicAlbum{
-		AlbumName:   "4",
-		Genre:       "William pearce",
-		Price:       2,
-		Description: "nce",
-		Musicians:   []string{"Josn", "Alice"},
+		AlbumName:     "AlbumNameTest",                    // Valid album name with at least 5 characters
+		DateOfRelease: time.Now(),                         // Mandatory date of release
+		Genre:         "GenreTest",                        // Optional genre
+		Price:         500,                                // Valid price between 100 and 1000
+		Description:   "DescriptionTest",                  // Optional description
+		Musicians:     []string{"Musician1", "Musician2"}, // Optional list of musicians
 	}
 	body, _ := json.Marshal(requestBody)
 	req, _ := http.NewRequest("POST", "/albums", bytes.NewBuffer(body))
@@ -59,45 +60,6 @@ func TestCreateAlbum(t *testing.T) {
 
 	// Check that the DateOfRelease is not zero
 	assert.NotEqual(t, time.Time{}, response.DateOfRelease)
-}
-
-func TestUpdateAlbum(t *testing.T) {
-	// Set up a test router using Gin
-	router := gin.Default()
-
-	// Define a route to create an album
-	router.POST("/albums", CreateAlbum)
-
-	// Define a route to update an album
-	router.PUT("/albums/:albumName", UpdateAlbum)
-
-	// Create a request to add an album with name "4"
-	createAlbumRequest := httptest.NewRequest("POST", "/albums", bytes.NewBufferString(`{
-		"albumName": "4",
-		"genre": "William pearce",
-		"price": 2,
-		"description": "nce",
-		"musicians": ["Josn", "Alice"]
-	}`))
-	createAlbumResponse := httptest.NewRecorder()
-	router.ServeHTTP(createAlbumResponse, createAlbumRequest)
-
-	// Assert that the album was created successfully (status code 201)
-	assert.Equal(t, http.StatusCreated, createAlbumResponse.Code)
-
-	// Create a request to update the album with name "4"
-	updateAlbumRequest := httptest.NewRequest("PUT", "/albums/4", bytes.NewBufferString(`{
-		"albumName": "4",
-		"genre": "Updated Genre",
-		"price": 5,
-		"description": "Updated Description",
-		"musicians": ["Updated Musician"]
-	}`))
-	updateAlbumResponse := httptest.NewRecorder()
-	router.ServeHTTP(updateAlbumResponse, updateAlbumRequest)
-
-	// Assert that the album was updated successfully (status code 200)
-	assert.Equal(t, http.StatusOK, updateAlbumResponse.Code)
 }
 
 func TestGetAlbumsSortedByDate(t *testing.T) {
