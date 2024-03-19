@@ -2,7 +2,7 @@
 
 ## Problem
 
-### JukeBox application is intended to maintain a catalogue of music albums by various musicians. The application should also maintain information about musicians, music and the relationships between musicians and music (i.e, who has sung/played which album). You are required to implement a set of demonstrable REST APIs that can be consumed by any UI/client application to retrieve information about artists and music albums & also to add new music albums, artist details.
+JukeBox application is intended to maintain a catalogue of music albums by various musicians. The application should also maintain information about musicians, music and the relationships between musicians and music (i.e, who has sung/played which album). You are required to implement a set of demonstrable REST APIs that can be consumed by any UI/client application to retrieve information about artists and music albums & also to add new music albums, artist details.
 
 Following information should be maintained for Music Albums
 
