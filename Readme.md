@@ -22,7 +22,7 @@ Constraints
 - A music album can be sung/played by one or more musicians
 - A musician can contribute (sing or play) to multiple music albums
 
-APIs to be Developed
+APIS to be Developed
 
 Implement REST APIs for the following:
 
