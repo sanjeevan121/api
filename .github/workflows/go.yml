@@ -9,15 +9,16 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest # Change the OS to Windows
+
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2  # Update to the latest version of actions/checkout
 
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: '1.21.2' # Update to the desired Go version
+        go-version: '1.21.2' # Update to the desired Go version compatible with Windows
 
     - name: Build
       run: go build .
